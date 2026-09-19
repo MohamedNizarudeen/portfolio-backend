@@ -2,6 +2,7 @@ package com.example.portfolio_backend.controller;
 
 import com.example.portfolio_backend.entity.contactEntity;
 import com.example.portfolio_backend.service.contactService;
+import com.resend.core.exception.ResendException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +16,7 @@ public class contactController {
     private contactService contactService;
 
     @PostMapping
-    public String contactMe(@RequestBody contactEntity form) {
+    public String contactMe(@RequestBody contactEntity form) throws ResendException {
         contactService.sendContactEmail(form.getEmail(), form.getName(), form.getMessage());
         return "Message sent successfully!";
     }
